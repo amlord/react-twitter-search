@@ -8,6 +8,7 @@
 
 # production
 /build
+/src/api/Twitter.conf.js
 
 # misc
 .DS_Store
