@@ -1,4 +1,4 @@
-import { CONSUMER_KEY, CONSUMER_SECRET, AUTH_URL, TIMELINE_URL } from './Twitter.conf';
+import { CONSUMER_KEY, CONSUMER_SECRET, AUTH_URL, TIMELINE_URL, SEARCH_URL } from './Twitter.conf';
 import { Twitter } from './Twitter';
 
 describe('Twitter API', () => {
@@ -65,6 +65,25 @@ describe('Twitter API', () => {
                     expect(data).toHaveLength(20);
                     expect(data[0]).toHaveProperty('created_at');
                     expect(data[0]).toHaveProperty('text');
+                });
+            });
+        });
+
+        describe('Search tweets', () => {
+            it("Fetched tweets matching 'React'", () => {
+                const SEARCH = 'React';
+                
+                expect.assertions(6);
+                return Twitter.searchTweets( SEARCH_URL, SEARCH, TOKEN ).then(data => {
+                    // cheeck search response structure
+                    expect(data).toBeInstanceOf(Object);
+                    expect(data).toHaveProperty('search_metadata');
+                    expect(data.search_metadata).toHaveProperty('query', SEARCH);
+                    expect(data).toHaveProperty('statuses');
+
+                    // check first tweet structure
+                    expect(data.statuses[0]).toHaveProperty('created_at');
+                    expect(data.statuses[0]).toHaveProperty('text');
                 });
             });
         });

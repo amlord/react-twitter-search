@@ -58,6 +58,35 @@ const Twitter = {
                 resolve(body);
             });
         });
+    },
+    searchTweets: function(url, search, token) {
+        const options = {
+            method: 'GET',
+            url,
+            qs: {
+                "q": search
+            },
+            json: true,
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        };
+
+        return new Promise((resolve, reject) => {
+            request(options, function(error, response, body) {
+                // connection issue
+                if( error ){
+                    reject('connection_error');
+                }
+
+                // request issue
+                if( response.hasOwnProperty('errors') ){
+                    reject(response.errors[0].label);
+                }
+
+                resolve(body);
+            });
+        });
     }
 };
 
