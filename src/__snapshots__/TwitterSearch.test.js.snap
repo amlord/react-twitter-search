@@ -19,21 +19,21 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <header
-          className="App-header"
+          className="TwitterSearch__header"
 >
           <img
                     alt="logo"
-                    className="App-logo"
+                    className="TwitterSearch__logo"
                     src="logo.svg"
           />
           <h1
-                    className="App-title"
+                    className="TwitterSearch__title"
           >
                     Welcome to React
           </h1>
 </header>,
         <p
-          className="App-intro"
+          className="TwitterSearch__intro"
 >
           To get started, edit 
           <code>
@@ -41,8 +41,9 @@ ShallowWrapper {
           </code>
            and save to reload.
 </p>,
+        <Tweets />,
       ],
-      "className": "App",
+      "className": "TwitterSearch",
     },
     "ref": null,
     "rendered": Array [
@@ -54,16 +55,16 @@ ShallowWrapper {
           "children": Array [
             <img
               alt="logo"
-              className="App-logo"
+              className="TwitterSearch__logo"
               src="logo.svg"
 />,
             <h1
-              className="App-title"
+              className="TwitterSearch__title"
 >
               Welcome to React
 </h1>,
           ],
-          "className": "App-header",
+          "className": "TwitterSearch__header",
         },
         "ref": null,
         "rendered": Array [
@@ -73,7 +74,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "alt": "logo",
-              "className": "App-logo",
+              "className": "TwitterSearch__logo",
               "src": "logo.svg",
             },
             "ref": null,
@@ -86,7 +87,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "children": "Welcome to React",
-              "className": "App-title",
+              "className": "TwitterSearch__title",
             },
             "ref": null,
             "rendered": "Welcome to React",
@@ -107,7 +108,7 @@ ShallowWrapper {
 </code>,
             " and save to reload.",
           ],
-          "className": "App-intro",
+          "className": "TwitterSearch__intro",
         },
         "ref": null,
         "rendered": Array [
@@ -127,6 +128,15 @@ ShallowWrapper {
         ],
         "type": "p",
       },
+      Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "class",
+        "props": Object {},
+        "ref": null,
+        "rendered": null,
+        "type": [Function],
+      },
     ],
     "type": "div",
   },
@@ -138,21 +148,21 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <header
-            className="App-header"
+            className="TwitterSearch__header"
 >
             <img
                         alt="logo"
-                        className="App-logo"
+                        className="TwitterSearch__logo"
                         src="logo.svg"
             />
             <h1
-                        className="App-title"
+                        className="TwitterSearch__title"
             >
                         Welcome to React
             </h1>
 </header>,
           <p
-            className="App-intro"
+            className="TwitterSearch__intro"
 >
             To get started, edit 
             <code>
@@ -160,8 +170,9 @@ ShallowWrapper {
             </code>
              and save to reload.
 </p>,
+          <Tweets />,
         ],
-        "className": "App",
+        "className": "TwitterSearch",
       },
       "ref": null,
       "rendered": Array [
@@ -173,16 +184,16 @@ ShallowWrapper {
             "children": Array [
               <img
                 alt="logo"
-                className="App-logo"
+                className="TwitterSearch__logo"
                 src="logo.svg"
 />,
               <h1
-                className="App-title"
+                className="TwitterSearch__title"
 >
                 Welcome to React
 </h1>,
             ],
-            "className": "App-header",
+            "className": "TwitterSearch__header",
           },
           "ref": null,
           "rendered": Array [
@@ -192,7 +203,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "alt": "logo",
-                "className": "App-logo",
+                "className": "TwitterSearch__logo",
                 "src": "logo.svg",
               },
               "ref": null,
@@ -205,7 +216,7 @@ ShallowWrapper {
               "nodeType": "host",
               "props": Object {
                 "children": "Welcome to React",
-                "className": "App-title",
+                "className": "TwitterSearch__title",
               },
               "ref": null,
               "rendered": "Welcome to React",
@@ -226,7 +237,7 @@ ShallowWrapper {
 </code>,
               " and save to reload.",
             ],
-            "className": "App-intro",
+            "className": "TwitterSearch__intro",
           },
           "ref": null,
           "rendered": Array [
@@ -245,6 +256,15 @@ ShallowWrapper {
             " and save to reload.",
           ],
           "type": "p",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "class",
+          "props": Object {},
+          "ref": null,
+          "rendered": null,
+          "type": [Function],
         },
       ],
       "type": "div",

@@ -4,6 +4,7 @@ import './TwitterSearch.css';
 
 import { Twitter } from './api/Twitter';
 import { CONSUMER_KEY, CONSUMER_SECRET, AUTH_URL, TIMELINE_URL, SEARCH_URL } from './api/Twitter.conf';
+import Tweets from './components/Tweets';
 
 class TwitterSearch extends Component {
   constructor(){
@@ -37,7 +38,7 @@ class TwitterSearch extends Component {
     
     // if token already exists
     if( token ) {
-      
+
       // resolves after `timeline` updated
       return Twitter.fetchUserTimeline( TIMELINE_URL, timeline.user, token ).then(success => {
 
@@ -116,14 +117,15 @@ class TwitterSearch extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+      <div className="TwitterSearch">
+        <header className="TwitterSearch__header">
+          <img src={logo} className="TwitterSearch__logo" alt="logo" />
+          <h1 className="TwitterSearch__title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
+        <p className="TwitterSearch__intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <Tweets />
       </div>
     );
   }
