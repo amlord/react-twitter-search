@@ -24,6 +24,11 @@ class TwitterSearch extends Component {
     };
   }
 
+  componentDidMount() {
+    // load default user timeline
+    this.fetchTimelineData();
+  }
+
   setStatePromise(newState) {
     // resolves after `setState` changes applied
     return new Promise((resolve) => {
@@ -125,7 +130,7 @@ class TwitterSearch extends Component {
         <p className="TwitterSearch__intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <Tweets />
+        <Tweets tweetList={this.state.timeline.tweets} />
       </div>
     );
   }

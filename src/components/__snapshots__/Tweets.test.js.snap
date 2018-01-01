@@ -17,11 +17,26 @@ ShallowWrapper {
     "key": undefined,
     "nodeType": "host",
     "props": Object {
-      "children": "TWEETS",
+      "children": <div
+        className="Tweets_noneFound"
+>
+        (no tweets found)
+</div>,
       "className": "Tweets",
     },
     "ref": null,
-    "rendered": "TWEETS",
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": "(no tweets found)",
+        "className": "Tweets_noneFound",
+      },
+      "ref": null,
+      "rendered": "(no tweets found)",
+      "type": "div",
+    },
     "type": "div",
   },
   Symbol(enzyme.__nodes__): Array [
@@ -30,11 +45,26 @@ ShallowWrapper {
       "key": undefined,
       "nodeType": "host",
       "props": Object {
-        "children": "TWEETS",
+        "children": <div
+          className="Tweets_noneFound"
+>
+          (no tweets found)
+</div>,
         "className": "Tweets",
       },
       "ref": null,
-      "rendered": "TWEETS",
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": "(no tweets found)",
+          "className": "Tweets_noneFound",
+        },
+        "ref": null,
+        "rendered": "(no tweets found)",
+        "type": "div",
+      },
       "type": "div",
     },
   ],

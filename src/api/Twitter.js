@@ -9,7 +9,9 @@ const Twitter = {
             url,
             headers: {
                 'Authorization': 'Basic ' + secret,
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Origin': 'https://andrewlord.co.uk'
+            },
             body: 'grant_type=client_credentials'
         };
 
@@ -38,7 +40,8 @@ const Twitter = {
             },
             json: true,
             headers: {
-                "Authorization": "Bearer " + token
+                "Authorization": "Bearer " + token,
+                'Origin': 'https://andrewlord.co.uk'
             }
         };
 
@@ -67,7 +70,8 @@ const Twitter = {
             },
             json: true,
             headers: {
-                "Authorization": "Bearer " + token
+                "Authorization": "Bearer " + token,
+                'Origin': 'https://andrewlord.co.uk'
             }
         };
 
