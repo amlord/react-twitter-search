@@ -1,4 +1,3 @@
-/*** create-twitter-bearer-token.js ***/
 import request from 'request';
 
 const Twitter = {
