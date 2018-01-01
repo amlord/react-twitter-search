@@ -67,12 +67,18 @@ describe('Twitter API', () => {
                     expect(data[0]).toHaveProperty('text');
                 });
             });
+
+            it('Fails with error; bad URL', () => {
+                expect.assertions(1);
+                return Twitter.fetchUserTimeline( 'TIMELINE_URL', 'twitterapi', TOKEN ).catch(e => expect(e).toMatch('connection_error'));
+            });
         });
 
         describe('Search tweets', () => {
             it("Fetched tweets matching 'React'", () => {
-                const SEARCH = 'React';
                 
+                const SEARCH = 'React';
+
                 expect.assertions(6);
                 return Twitter.searchTweets( SEARCH_URL, SEARCH, TOKEN ).then(data => {
                     // cheeck search response structure
@@ -85,6 +91,11 @@ describe('Twitter API', () => {
                     expect(data.statuses[0]).toHaveProperty('created_at');
                     expect(data.statuses[0]).toHaveProperty('text');
                 });
+            });
+
+            it('Fails with error; bad URL', () => {
+                expect.assertions(1);
+                return Twitter.searchTweets( 'SEARCH_URL', 'React', TOKEN ).catch(e => expect(e).toMatch('connection_error'));
             });
         });
     });
