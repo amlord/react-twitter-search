@@ -70,7 +70,49 @@ class TwitterSearch extends Component {
   }
 
   fetchSearchData() {
-    return true;
+    let { token, search } = this.state;
+    
+    // if token already exists
+    if( token ) {
+      // resolves after `search` updated
+      return Twitter.searchTweets( SEARCH_URL, search.text, token ).then(success => {
+        // resolves after `setState` changes applied
+        return new Promise((resolve) => {
+          this.setState({
+            search: {
+              text: search.text,
+              tweets: success.statuses
+            }
+          }, () => {
+              resolve();
+          });
+        });
+      });
+    }
+
+    // encode the authorisation key
+    const SECRET = Twitter.encodeSecret( CONSUMER_KEY, CONSUMER_SECRET );
+
+    // get the bearer token
+    return Twitter.fetchBearerToken( AUTH_URL, SECRET ).then(newToken => {
+      token = newToken;
+
+      // resolves after `search` updated
+      return Twitter.searchTweets( SEARCH_URL, search.user, token ).then(success => {
+        // resolves after `setState` changes applied
+        return new Promise((resolve) => {
+          this.setState({
+            token,
+            search: {
+              text: search.text,
+              tweets: success.statuses
+            }
+          }, () => {
+              resolve();
+          });
+        });
+      });
+    });
   }
 
   render() {

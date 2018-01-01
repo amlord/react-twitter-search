@@ -63,5 +63,23 @@ describe('Twitter Search App', () => {
         expect(TWITTER.state().timeline.tweets[0]).toHaveProperty('text');
       });
     });
+
+    describe('`search` API', () => {
+      beforeAll(() => {
+        // promise to get the initial load data
+        return TWITTER.instance().fetchSearchData();
+      });
+  
+      it('`bearer token` set', () => {
+        expect(TWITTER.state().token).toBeTruthy();
+      });
+  
+      it('array of `tweets` exist', () => {
+        expect(TWITTER.state().search.tweets).toBeInstanceOf(Array);
+        expect(TWITTER.state().search.tweets).toHaveLength(15);
+        expect(TWITTER.state().search.tweets[0]).toHaveProperty('created_at');
+        expect(TWITTER.state().search.tweets[0]).toHaveProperty('text');
+      });
+    });
   });
 });
