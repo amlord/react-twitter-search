@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import TwitterSearch from './TwitterSearch';
 
@@ -8,7 +8,7 @@ describe('Twitter Search App', () => {
   const TWITTER = shallow(<TwitterSearch />);
 
   it('renders correctly', () => {
-    expect(TWITTER).toMatchSnapshot();
+    expect( TWITTER ).toMatchSnapshot();
   });
 
   it('renders without crashing', () => {
@@ -17,6 +17,7 @@ describe('Twitter Search App', () => {
   });
 
   describe('initial state', () => {
+
     it('`bearer token` set to null', () => {
       expect(TWITTER.state().token).toEqual(null);
     });
@@ -41,6 +42,26 @@ describe('Twitter Search App', () => {
 
     it('`loading` set to true', () => {
       expect(TWITTER.state().loading).toEqual(true);
+    });
+  });
+
+  describe('`state` after initial load', () => {
+    describe('`timeline` API', () => {
+      beforeAll(() => {
+        // promise to get the initial load data
+        return TWITTER.instance().fetchTimelineData();
+      });
+
+      it('`bearer token` set', () => {
+        expect(TWITTER.state().token).toBeTruthy();
+      });
+
+      it('array of `tweets` exist', () => {
+        expect(TWITTER.state().timeline.tweets).toBeInstanceOf(Array);
+        expect(TWITTER.state().timeline.tweets).toHaveLength(20);
+        expect(TWITTER.state().timeline.tweets[0]).toHaveProperty('created_at');
+        expect(TWITTER.state().timeline.tweets[0]).toHaveProperty('text');
+      });
     });
   });
 });
