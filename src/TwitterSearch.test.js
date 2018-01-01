@@ -15,4 +15,32 @@ describe('Twitter Search App', () => {
     const div = document.createElement('div');
     ReactDOM.render(<TwitterSearch />, div);
   });
+
+  describe('initial state', () => {
+    it('`bearer token` set to null', () => {
+      expect(TWITTER.state().token).toEqual(null);
+    });
+
+    it('`timeline` user set to `twitterapi`', () => {
+      expect(TWITTER.state().timeline.user).toEqual('twitterapi');
+    });
+
+    it('`timeline` tweets are empty', () => {
+      expect(TWITTER.state().timeline.tweets).toBeInstanceOf(Array);
+      expect(TWITTER.state().timeline.tweets).toHaveLength(0);
+    });
+
+    it('`search` text set to `React`', () => {
+      expect(TWITTER.state().search.text).toEqual('React');
+    });
+
+    it('`search` tweets are empty', () => {
+      expect(TWITTER.state().search.tweets).toBeInstanceOf(Array);
+      expect(TWITTER.state().search.tweets).toHaveLength(0);
+    });
+
+    it('`loading` set to true', () => {
+      expect(TWITTER.state().loading).toEqual(true);
+    });
+  });
 });
