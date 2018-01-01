@@ -24,14 +24,30 @@ describe('Twitter API', () => {
     });
 
     describe('Authentication', () => {
-        it('Get Bearer Token', () => {
-            
+        const SECRET = Twitter.encodeSecret( CONSUMER_KEY, CONSUMER_SECRET );
+
+        it('Bearer Token Fetched', () => {
+            expect.assertions(2);
+            return Twitter.fetchBearerToken( API_URL, SECRET ).then(data => {
+                expect(data).toBeTruthy();
+                expect(data).toHaveLength(112);
+            });
+        });
+
+        it('Fails with error; bad secret data', () => {
+            expect.assertions(1);
+            return Twitter.fetchBearerToken( API_URL, 'SECRET' ).catch(e => expect(e).toMatch('authenticity_token_error'));
+        });
+
+        it('Fails with error; bad URL', () => {
+            expect.assertions(1);
+            return Twitter.fetchBearerToken( 'API_URL', SECRET ).catch(e => expect(e).toMatch('connection_error'));
         });
     });
 
     describe('Search', () => {
-        it('', () => {
+        // it('', () => {
             
-        });
+        // });
     });
 });
