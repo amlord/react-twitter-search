@@ -17,11 +17,6 @@ describe('Twitter Search App', () => {
   });
 
   describe('initial state', () => {
-
-    it('`bearer token` set to null', () => {
-      expect(TWITTER.state().token).toEqual(null);
-    });
-
     it('`timeline` user set to `twitterapi`', () => {
       expect(TWITTER.state().timeline.user).toEqual('twitterapi');
     });
@@ -52,10 +47,6 @@ describe('Twitter Search App', () => {
         return TWITTER.instance().fetchTimelineData();
       });
 
-      it('`bearer token` set', () => {
-        expect(TWITTER.state().token).toBeTruthy();
-      });
-
       it('array of `tweets` exist', () => {
         expect(TWITTER.state().timeline.tweets).toBeInstanceOf(Array);
         expect(TWITTER.state().timeline.tweets).toHaveLength(20);
@@ -68,10 +59,6 @@ describe('Twitter Search App', () => {
       beforeAll(() => {
         // promise to get the initial load data
         return TWITTER.instance().fetchSearchData();
-      });
-  
-      it('`bearer token` set', () => {
-        expect(TWITTER.state().token).toBeTruthy();
       });
   
       it('array of `tweets` exist', () => {

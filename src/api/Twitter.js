@@ -1,48 +1,16 @@
 import request from 'request';
 
+import { KEY, TIMELINE_URL, SEARCH_URL } from './Twitter.conf';
+
 const Twitter = {
-    encodeSecret: function(key, secret){
-        return new Buffer(key + ':' + secret).toString('base64');
-    },
-    fetchBearerToken: function(url, secret){
-        const options = {
-            url,
-            headers: {
-                'Authorization': 'Basic ' + secret,
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                'Origin': 'https://andrewlord.co.uk'
-            },
-            body: 'grant_type=client_credentials'
-        };
-
-        return new Promise((resolve, reject) => {
-            request.post(options, (error, response, body) => {
-                if( error ){
-                    reject('connection_error');
-                }
-
-                let responseData = JSON.parse(body);
-
-                if( responseData.hasOwnProperty('errors') ){
-                    reject(responseData.errors[0].label);
-                }
-
-                resolve(responseData.access_token);
-            });
-        });
-    },
-    fetchUserTimeline: function(url, user, token) {
+    fetchUserTimeline: function(user) {
         const options = {
             method: 'GET',
-            url,
+            url: TIMELINE_URL + "/" + user,
             qs: {
-                "screen_name": user
+                "key": KEY
             },
-            json: true,
-            headers: {
-                "Authorization": "Bearer " + token,
-                'Origin': 'https://andrewlord.co.uk'
-            }
+            json: true
         };
 
         return new Promise((resolve, reject) => {
@@ -61,18 +29,14 @@ const Twitter = {
             });
         });
     },
-    searchTweets: function(url, search, token) {
+    searchTweets: function(search) {
         const options = {
             method: 'GET',
-            url,
+            url: SEARCH_URL + "/" + search,
             qs: {
-                "q": search
+                "key": KEY
             },
-            json: true,
-            headers: {
-                "Authorization": "Bearer " + token,
-                'Origin': 'https://andrewlord.co.uk'
-            }
+            json: true
         };
 
         return new Promise((resolve, reject) => {
