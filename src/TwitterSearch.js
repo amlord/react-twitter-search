@@ -23,23 +23,30 @@ class TwitterSearch extends Component {
     };
   }
 
+  setStatePromise(newState) {
+    // resolves after `setState` changes applied
+    return new Promise((resolve) => {
+      this.setState(newState, () => {
+          resolve();
+      });
+    });
+  }
+
   fetchTimelineData() {
     let { token, timeline } = this.state;
     
     // if token already exists
     if( token ) {
+      
       // resolves after `timeline` updated
       return Twitter.fetchUserTimeline( TIMELINE_URL, timeline.user, token ).then(success => {
+
         // resolves after `setState` changes applied
-        return new Promise((resolve) => {
-          this.setState({
-            timeline: {
-              user: timeline.user,
-              tweets: success
-            }
-          }, () => {
-              resolve();
-          });
+        return this.setStatePromise({
+          timeline: {
+            user: timeline.user,
+            tweets: success
+          }
         });
       });
     }
@@ -53,17 +60,14 @@ class TwitterSearch extends Component {
 
       // resolves after `timeline` updated
       return Twitter.fetchUserTimeline( TIMELINE_URL, timeline.user, token ).then(success => {
+
         // resolves after `setState` changes applied
-        return new Promise((resolve) => {
-          this.setState({
-            token,
-            timeline: {
-              user: timeline.user,
-              tweets: success
-            }
-          }, () => {
-              resolve();
-          });
+        return this.setStatePromise({
+          token,
+          timeline: {
+            user: timeline.user,
+            tweets: success
+          }
         });
       });
     });
@@ -74,18 +78,16 @@ class TwitterSearch extends Component {
     
     // if token already exists
     if( token ) {
+
       // resolves after `search` updated
       return Twitter.searchTweets( SEARCH_URL, search.text, token ).then(success => {
+
         // resolves after `setState` changes applied
-        return new Promise((resolve) => {
-          this.setState({
-            search: {
-              text: search.text,
-              tweets: success.statuses
-            }
-          }, () => {
-              resolve();
-          });
+        return this.setStatePromise({
+          search: {
+            text: search.text,
+            tweets: success.statuses
+          }
         });
       });
     }
@@ -99,17 +101,14 @@ class TwitterSearch extends Component {
 
       // resolves after `search` updated
       return Twitter.searchTweets( SEARCH_URL, search.user, token ).then(success => {
+
         // resolves after `setState` changes applied
-        return new Promise((resolve) => {
-          this.setState({
-            token,
-            search: {
-              text: search.text,
-              tweets: success.statuses
-            }
-          }, () => {
-              resolve();
-          });
+        return this.setStatePromise({
+          token,
+          search: {
+            text: search.text,
+            tweets: success.statuses
+          }
         });
       });
     });
