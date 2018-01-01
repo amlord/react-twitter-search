@@ -29,6 +29,35 @@ const Twitter = {
                 resolve(responseData.access_token);
             });
         });
+    },
+    fetchUserTimeline: function(url, user, token) {
+        const options = {
+            method: 'GET',
+            url,
+            qs: {
+                "screen_name": user
+            },
+            json: true,
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        };
+
+        return new Promise((resolve, reject) => {
+            request(options, function(error, response, body) {
+                // connection issue
+                if( error ){
+                    reject('connection_error');
+                }
+
+                // request issue
+                if( response.hasOwnProperty('errors') ){
+                    reject(response.errors[0].label);
+                }
+
+                resolve(body);
+            });
+        });
     }
 };
 

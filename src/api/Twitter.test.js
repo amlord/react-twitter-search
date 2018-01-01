@@ -1,4 +1,4 @@
-import { CONSUMER_KEY, CONSUMER_SECRET, API_URL } from './Twitter.conf';
+import { CONSUMER_KEY, CONSUMER_SECRET, AUTH_URL, TIMELINE_URL } from './Twitter.conf';
 import { Twitter } from './Twitter';
 
 describe('Twitter API', () => {
@@ -15,7 +15,7 @@ describe('Twitter API', () => {
             // valid URL Regular Expression
             const urlRegEx = /https:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/;
 
-            expect( urlRegEx.test( API_URL ) ).toBeTruthy();
+            expect( urlRegEx.test( AUTH_URL ) ).toBeTruthy();
         });
 
         it('Encode Secret', () => {
@@ -28,7 +28,7 @@ describe('Twitter API', () => {
 
         it('Bearer Token Fetched', () => {
             expect.assertions(2);
-            return Twitter.fetchBearerToken( API_URL, SECRET ).then(data => {
+            return Twitter.fetchBearerToken( AUTH_URL, SECRET ).then(data => {
                 expect(data).toBeTruthy();
                 expect(data).toHaveLength(112);
             });
@@ -36,7 +36,7 @@ describe('Twitter API', () => {
 
         it('Fails with error; bad secret data', () => {
             expect.assertions(1);
-            return Twitter.fetchBearerToken( API_URL, 'SECRET' ).catch(e => expect(e).toMatch('authenticity_token_error'));
+            return Twitter.fetchBearerToken( AUTH_URL, 'SECRET' ).catch(e => expect(e).toMatch('authenticity_token_error'));
         });
 
         it('Fails with error; bad URL', () => {
@@ -45,9 +45,28 @@ describe('Twitter API', () => {
         });
     });
 
-    describe('Search', () => {
-        // it('', () => {
-            
-        // });
+    describe('API Calls', () => {
+        let TOKEN;
+
+        beforeAll(() => {
+            const SECRET = Twitter.encodeSecret( CONSUMER_KEY, CONSUMER_SECRET );
+
+            // promise to return the bearer token for this set of tests
+            return Twitter.fetchBearerToken( AUTH_URL, SECRET ).then(data => {
+                TOKEN = data;
+            });
+        });
+
+        describe('User timeline', () => {
+            it('Tweets fetched for @twitterapi', () => {
+                expect.assertions(4);
+                return Twitter.fetchUserTimeline( TIMELINE_URL, 'twitterapi', TOKEN ).then(data => {
+                    expect(data).toBeInstanceOf(Array);
+                    expect(data).toHaveLength(20);
+                    expect(data[0]).toHaveProperty('created_at');
+                    expect(data[0]).toHaveProperty('text');
+                });
+            });
+        });
     });
 });
